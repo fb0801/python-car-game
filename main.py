@@ -73,11 +73,26 @@ player_car = PlayerCar(4, 4)
 while run:
     clock.tick(FPS)
 
-    draw(WIN, images)
-    pygame.display.update()
+    draw(WIN, images, player_car)
 
-    for event in pygame.event.get(): 
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
             break
+
+    keys = pygame.key.get_pressed()
+    moved = False
+
+    if keys[pygame.K_a]:
+        player_car.rotate(left=True)
+    if keys[pygame.K_d]:
+        player_car.rotate(right=True)
+    if keys[pygame.K_w]:
+        moved = True
+        player_car.move_forward()
+
+    if not moved:
+        player_car.reduce_speed()
+
+
 pygame.quit()
