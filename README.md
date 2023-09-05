@@ -16,3 +16,5 @@ original repo -> https://github.com/techwithtim/Pygame-Car-Racer/tree/main
 https://www.toptal.com/developers/gitignore/
 
 https://www.youtube.com/watch?v=WfqXcyF0_b0
+
+https://www.youtube.com/watch?v=V_B5ZCli-rA
