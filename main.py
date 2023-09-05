@@ -21,6 +21,9 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Racing Game!")
 
 FPS = 60
+PATH = [(175, 119), (110, 70), (56, 133), (70, 481), (318, 731), (404, 680), (418, 521), (507, 475), (600, 551), (613, 715), (736, 713),
+        (734, 399), (611, 357), (409, 343), (433, 257), (697, 258), (738, 123), (581, 71), (303, 78), (275, 377), (176, 388), (178, 260)]
+
 
 class AbstractCar:
     def __init__(self, max_vel, rotation_vel):
@@ -132,7 +135,7 @@ run = True
 clock = pygame.time.Clock()
 images = [(GRASS, (0, 0)), (TRACK, (0, 0)), (FINISH, FINISH_POSITION), (TRACK_BORDER, (0,0))]
 player_car = PlayerCar(4, 4)
-computer_car = ComputerCar(4,4)
+computer_car = ComputerCar(4,4, PATH)
 
 
 
@@ -147,7 +150,10 @@ while run:
             run = False
             break
 
+        
+
     move_player(player_car)
+
     if player_car.collide(TRACK_BORDER_MASK) != None:
         player_car.bounce()    
 
