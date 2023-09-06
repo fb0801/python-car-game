@@ -231,7 +231,15 @@ while run:
 
     while not game_info.started:
         blit_text_center(WIN, MAIN_FONT, f'Press any key to start lvl {game_info.level}!')
+        pygame.display.update()
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                break
+
+            if event.type == pygame.KEYDOWN:
+                game_info.start_level()
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
