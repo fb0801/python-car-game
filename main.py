@@ -1,7 +1,7 @@
 import pygame
 import time
 import math
-from utils import scale_image, blit_rotate_center
+from utils import scale_image, blit_rotate_center, blit_text_center
 
 pygame.font.init()
 GRASS = scale_image(pygame.image.load("imgs/grass.jpg"), 2.5)
@@ -20,6 +20,8 @@ GREEN_CAR = scale_image(pygame.image.load("imgs/green-car.png"), 0.55)
 WIDTH, HEIGHT = TRACK.get_width(), TRACK.get_height()
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Racing Game!")
+
+MAIN_FONT = pygame.font.SysFont('comicsans', 44)
 
 FPS = 60
 PATH = [(175, 119), (110, 70), (56, 133), (70, 481), (318, 731), (404, 680), (418, 521), (507, 475), (600, 551), (613, 715), (736, 713),
@@ -228,7 +230,8 @@ while run:
     draw(WIN, images, player_car, computer_car)
 
     while not game_info.started:
-        pass
+        blit_text_center(WIN, MAIN_FONT, f'Press any key to start lvl {game_info.level}!')
+        for event in pygame.event.get():
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
