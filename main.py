@@ -169,6 +169,11 @@ class ComputerCar(AbstractCar):
         self.update_path_point()
         super().move()
 
+    def next_level(self, level):
+        self.reset()
+        self.vel = self.max_vel + (level - 1) * 0.2
+        self.current_point = 0
+
 
 
 def draw(win, images, player_car, computer_car, game_info):
@@ -207,13 +212,16 @@ def move_player(player_car):
         player_car.reduce_speed()
 
 
-def handle_collision(player_car, computer_car):
+def handle_collision(player_car, computer_car, game_info):
     if player_car.collide(TRACK_BORDER_MASK) != None:
         player_car.bounce()
 
     computer_finish_poi_collide = computer_car.collide(
         FINISH_MASK, *FINISH_POSITION)
     if computer_finish_poi_collide != None:
+        blit_text_center(WIN, MAIN_FONT, 'YOU LOSE!')
+        pygame.time.wait(5000)
+        game_info.reset()
         player_car.reset()
         computer_car.reset()
 
@@ -223,8 +231,9 @@ def handle_collision(player_car, computer_car):
         if player_finish_poi_collide[1] == 0:
             player_car.bounce()
         else:
+            game_info.next_level()
             player_car.reset()
-            computer_car.reset()
+            computer_car.next_level(game_info.level)
 
 run = True
 clock = pygame.time.Clock()
@@ -258,7 +267,7 @@ while run:
     
     move_player(player_car)
     computer_car.move()
-    handle_collision(player_car, computer_car)
+    handle_collision(player_car, computer_car, game_info)
 
 
 pygame.quit()
